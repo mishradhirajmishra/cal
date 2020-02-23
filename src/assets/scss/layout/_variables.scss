@@ -1,0 +1,72 @@
+////////// SIDEBAR ////////
+$sidebar-width-lg: 250px;
+$sidebar-width-mini: 185px;
+$sidebar-width-icon: 100px;
+
+
+$sidebar-bg:  #000000;
+$sidebar-wrapper-bg: linear-gradient(to bottom right,#389466,#42b883);
+$sidebar-menu-color: #ffffff;
+$sidebar-menu-active-bg: initial;
+$sidebar-menu-active-color: #ffffff;
+$sidebar-menu-hover-bg: rgba(255, 255, 255, 0.2);
+$sidebar-menu-hover-color: #d0cfcf;
+$sidebar-submenu-color: $sidebar-menu-color;
+$sidebar-submenu-hover-bg: initial;
+$sidebar-submenu-hover-color: #bebdc2;
+$sidebar-submenu-active-color: #ffffff;
+$sidebar-menu-icon-color: #ffffff;
+$sidebar-menu-arrow-color: $sidebar-menu-color;
+
+$sidebar-menu-font-size: .7rem;
+$sidebar-menu-padding-left: 2rem;
+$sidebar-menu-padding-right: 2rem;
+$sidebar-menu-padding-top: .75rem;
+$sidebar-menu-padding-bottom: .75rem;
+
+$sidebar-submenu-padding: .25rem 0 0 3.5rem;
+$sidebar-submenu-font-size: 0.6rem;
+$sidebar-submenu-item-padding: 1rem 0rem;
+
+$sidebar-icon-font-size:  1.1rem;
+$sidebar-arrow-font-size: .625rem;
+
+$sidebar-profile-bg: transparent;
+$sidebar-profile-padding: 0 1.625rem 2.25rem 1.188rem;
+
+$sidebar-mini-menu-padding: .8125rem 1rem .8125rem 1rem;
+
+$sidebar-icon-only-menu-padding: .5rem 1.625rem .5rem 1.188rem;
+$sidebar-icon-only-submenu-padding: 0 0 0 1.5rem;
+
+$rtl-sidebar-submenu-padding: 0 4.5rem 0 0;
+
+$icon-only-collapse-width: 190px;
+$icon-only-menu-bg: $card-bg;
+
+$sidebar-content-wrapper-margin-top: 18px;
+$sidebar-content-wrapper-margin-right: 0px;
+$sidebar-content-wrapper-margin-bottom: 18px;
+$sidebar-content-wrapper-margin-left: 20px;
+
+///////// SIDEBAR ////////
+
+///////// BOXED LAYOUT ///////
+$boxed-container-width: 1200px;
+$boxed-layout-bg: #c6c8ca;
+///////// BOXED LAYOUT ///////
+
+///////// SETTINGS PANEL ////////
+
+$settings-panel-width: 300px;
+
+///////// NAVBAR ////////
+
+$navbar-default-bg: #000000;
+$navbar-height: 106px;
+$navbar-mini-height: 60px;
+$navbar-menu-color: #9a9a9a;
+$navbar-font-size: 1rem;
+$navbar-icon-font-size: .9375rem;
+
+///////// NAVBAR ////////

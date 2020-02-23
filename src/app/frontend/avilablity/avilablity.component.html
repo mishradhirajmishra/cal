@@ -1,0 +1,123 @@
+<div class="row">
+  <div class="col-md-3">
+    <div class="fc-external-events">
+      <div class="fc-event" *ngFor="let service of allService;let i=index"
+        routerLink="/admin/avilablity/{{service._id}}" routerLinkActive="{{theme}}">
+        <p>{{service.name }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div *ngIf="currentService; else cur">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Enter regular hours every week</h4>
+          <div id="calendar" class="full-calendar fc fc-unthemed fc-ltr">
+            <div class="fc-view-container" style="">
+              <div class="fc-view fc-month-view fc-basic-view" style="">
+                <table class="">
+                  <thead class="fc-head">
+                    <tr>
+                      <td class="fc-head-container fc-widget-header">
+                        <div class="fc-row fc-widget-header">
+                          <table class="">
+                            <thead>
+                              <tr>
+                                <th class="fc-day-header fc-widget-header fc-sun"><span>Sun</span></th>
+                                <th class="fc-day-header fc-widget-header fc-mon"><span>Mon</span></th>
+                                <th class="fc-day-header fc-widget-header fc-tue"><span>Tue</span></th>
+                                <th class="fc-day-header fc-widget-header fc-wed"><span>Wed</span></th>
+                                <th class="fc-day-header fc-widget-header fc-thu"><span>Thu</span></th>
+                                <th class="fc-day-header fc-widget-header fc-fri"><span>Fri</span></th>
+                                <th class="fc-day-header fc-widget-header fc-sat"><span>Sat</span></th>
+                              </tr>
+                            </thead>
+                          </table>
+                        </div>
+                      </td>
+                    </tr>
+                  </thead>
+                  <tbody class="fc-body">
+                    <tr>
+                      <td class="fc-widget-content">
+                        <div class="fc-scroller fc-day-grid-container" style="overflow: hidden; height: 570.2px;">
+                          <div class="fc-day-grid fc-unselectable">
+                            <div class="fc-row fc-week fc-widget-content fc-rigid" style="height: 95px;">
+                              <div class="fc-bg">
+                                <table class="">
+                                  <tbody>
+                                    <tr>
+                                      <td class="fc-day fc-widget-content  date-wrap"
+                                        (click)="enterWeekData(currentService.day0,currentService._id,'day0')">
+                                        <br> {{currentService.day0}}
+                                      </td>
+                                      <td class="fc-day fc-widget-content date-wrap"
+                                        (click)="enterWeekData(currentService.day1,currentService._id,'day1')">
+                                        <br> {{currentService.day1}}
+                                      </td>
+                                      <td class="fc-day fc-widget-content date-wrap"
+                                        (click)="enterWeekData(currentService.day2,currentService._id,'day2')">
+                                        <br> {{currentService.day2}}
+                                      </td>
+                                      <td class="fc-day fc-widget-content date-wrap"
+                                        (click)="enterWeekData(currentService.day3,currentService._id,'day3')">
+                                        <br> {{currentService.day3}}
+                                      </td>
+                                      <td class="fc-day fc-widget-content date-wrap"
+                                        (click)="enterWeekData(currentService.day4,currentService._id,'day4')">
+                                        <br> {{currentService.day4}}
+                                      </td>
+                                      <td class="fc-day fc-widget-content date-wrap"
+                                        (click)="enterWeekData(currentService.day5,currentService._id,'day5')">
+                                        <br> {{currentService.day5}}
+                                      </td>
+                                      <td class="fc-day fc-widget-content date-wrap"
+                                        (click)="enterWeekData(currentService.day6,currentService._id,'day6')">
+                                        <br> {{currentService.day6}}
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="card">
+        <div class="card-body">
+                 <full-calendar defaultView="dayGridMonth" [plugins]="calendarPlugins" [events]="calendarEvents"
+            (dateClick)="handleDateClick($event)">
+          </full-calendar>
+        </div>
+      </div>
+
+    </div>
+    <ng-template #cur>
+      <div class="col-md-12 grid-margin mt-4">
+        <div class="card d-flex align-items-center">
+          <div class="card-body">
+            <div class="d-flex flex-row align-items-center">
+
+              <div class="ml-3">
+
+                <p class="mt-2 text-muted card-text">Please select a service</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+
+
+</div>

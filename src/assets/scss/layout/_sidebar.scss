@@ -1,0 +1,222 @@
+/* Sidebar */
+
+.sidebar {
+  min-height: 100vh;
+  height: 100vh;
+  font-family: $type1;
+  font-weight: 400;
+  background: $sidebar-bg;
+  padding: 0;
+  width: $sidebar-width-lg;
+  z-index: 11;
+  transition: width $action-transition-duration $action-transition-timing-function, background $action-transition-duration $action-transition-timing-function;
+  -webkit-transition: width $action-transition-duration $action-transition-timing-function, background $action-transition-duration $action-transition-timing-function;
+  -moz-transition: width $action-transition-duration $action-transition-timing-function, background $action-transition-duration $action-transition-timing-function;
+  -ms-transition: width $action-transition-duration $action-transition-timing-function, background $action-transition-duration $action-transition-timing-function;
+
+  @media(min-width: 992px) {
+    position: fixed;
+    max-height: auto; 
+  }
+
+  @media(max-width: 992px) {
+    width: 0;
+  }
+
+  .sidebar-content-wrapper {
+    background: $sidebar-wrapper-bg;
+    margin: $sidebar-content-wrapper-margin-top $sidebar-content-wrapper-margin-right $sidebar-content-wrapper-margin-bottom $sidebar-content-wrapper-margin-left;
+    border-radius: 8px;
+    @media(min-width: 992px) {
+      height: calc(100vh - (#{$sidebar-content-wrapper-margin-top} + #{$sidebar-content-wrapper-margin-bottom}));
+      overflow: auto;
+      position: relative;
+    }
+    @media(max-width: 992px) {
+      margin: 0;
+    }
+  }
+
+  .nav {
+    overflow: hidden;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    margin-bottom: 30px;
+
+    .nav-item {
+      @include transition-duration(0.25s);
+      transition-property: background;
+      -webkit-transition-property: background;
+      .collapse {
+        z-index: 999;
+      }
+
+      .nav-link {
+        @include display-flex;
+        @include align-items(center);
+        white-space: nowrap;
+        padding: $sidebar-menu-padding-top $sidebar-menu-padding-right $sidebar-menu-padding-bottom $sidebar-menu-padding-left;
+        color: $sidebar-menu-color;
+        @include transition-duration(0.45s);
+        transition-property: color;
+        -webkit-transition-property: color;
+
+        i {
+          color: inherit;
+
+          &.menu-icon {
+            font-size: $sidebar-icon-font-size;
+            line-height: 1;
+            margin-right: 0.6rem;
+            .rtl & {
+              margin-left: 2rem;
+              margin-right: 0;
+            }
+            color: $sidebar-menu-icon-color;
+            &:before {
+              vertical-align: middle;
+            }
+          }
+          &.menu-arrow {
+            display: inline-block;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            margin-left: auto;
+            margin-right: 0;
+            color: $sidebar-menu-arrow-color;
+            font-size: $sidebar-submenu-font-size;
+            .rtl & {
+              margin-left: 0;
+              margin-right: auto;
+            }
+          }
+        }
+
+        .menu-title {
+          color: inherit;
+          display: inline-block;
+          font-size: $sidebar-menu-font-size;
+          line-height: 1;
+          vertical-align: middle;
+          font-weight: 500;
+        }
+
+        .badge {
+          margin-left: auto;
+          .rtl & {
+            margin-left: 0;
+            margin-right: auto;
+          }
+        }
+        &[aria-expanded="true"] {
+          i {
+            &.menu-arrow {
+              &:before {
+                @include rotate(180);
+              }
+            }
+          }
+        }
+      }
+
+      &.active {
+        > .nav-link {
+            background: $sidebar-menu-active-bg;
+            position: relative;
+            i,
+            .menu-title,
+            .menu-arrow {
+              color: $sidebar-menu-active-color;
+            }
+            &:before {
+              content: "";
+              display: inline-block;
+              height: 8px;
+              width: 8px;
+              border-radius: 100%;
+              border: 2px solid rgba(255, 255, 255, 0.8);
+              position: absolute;
+              left: 13px;
+              top: 20px;
+            }
+        }
+      }
+    }
+
+    &:not(.sub-menu) {
+      margin-top: .5rem;
+      > .nav-item {
+        margin-top: .625rem;
+        > .nav-link {
+          margin: 0;
+        }
+        &:hover {
+          > .nav-link {
+            background: $sidebar-menu-hover-bg;
+            color: $sidebar-menu-hover-color;                                    
+          }
+        }
+      }
+    }
+    &.sub-menu {
+      margin-bottom: 0;
+      margin-top:0;
+      list-style: none;
+      padding: $sidebar-submenu-padding;
+
+      @media(min-width: 992px) {
+        max-height: none;
+      }
+
+      .nav-item {
+        padding: 0;
+        .nav-link {
+          color: $sidebar-submenu-color;
+          padding: $sidebar-submenu-item-padding;
+          position: relative;
+          font-size: $sidebar-submenu-font-size;
+          line-height: 1;
+          height: auto;
+          border-top: 0;
+          &:hover {
+            color: $sidebar-submenu-hover-color;
+          }
+          &.active {
+            color: $sidebar-submenu-active-color;
+            background: transparent;
+          }
+        }
+        &:hover {
+          background: transparent;
+        }
+      }
+    }
+  }
+  /* Sidebar color variations */
+  @each $color, $value in $theme-gradient-colors {
+    &.sidebar-#{$color} {
+      .sidebar-content-wrapper {
+        background: $value;
+      }
+    }
+  }
+}
+
+
+/* style for off-canvas menu*/
+@media screen and (max-width: 991px) {
+  .sidebar-offcanvas {
+    position: fixed;
+    max-height: calc(100vh - #{$navbar-mini-height});
+    top: $navbar-mini-height;
+    bottom: 0;
+    overflow: auto;
+    right: -$sidebar-width-lg;
+    -webkit-transition: all 0.25s ease-out;
+    -o-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+    &.active {
+      right: 0;
+    }
+  }
+}

@@ -1,0 +1,161 @@
+
+<div class="row">
+		<div *ngFor="let service of allService" class="col-md-4 grid-margin stretch-card">
+				<div class="card">
+					<div class="card-body">
+							
+						<div class="d-sm-flex flex-row flex-wrap text-center text-sm-left align-items-center">
+						
+							<div class="ml-sm-3 ml-md-0 ml-xl-3 mt-2 mt-sm-0 mt-md-2 mt-xl-0">
+								<br>
+								<h4 class="mb-1"><i class="fa fa fa-superpowers"></i>&nbsp;&nbsp; {{service?.name}}</h4>
+	
+								<p class=" mb-1 text-warning">Duration : {{service.duration}} Minute <span class="text-success font-weight-bold right"><span class="text-danger">Max</span>  &nbsp;<i class="fa fa-users"></i> {{service.maxAllowed}}</span></p>
+								<p class="text-muted mb-1">Resting Period : {{service.rest}} Minute after each service </p>				
+								<p class="text-info mb-1">Total Period : {{service.rest + service.duration }} Minute <span class="text-success font-weight-bold right"><span class="text-danger">@</span>  &nbsp;<i class="fa fa-inr"></i> {{service.price}}</span></p>	
+										
+								<p class="border-top pt-3 text-justify">
+									<button data-toggle="modal" data-target="#myModel" (click)="edit(service)" type="button"
+										class="btn btn-outline-info btn-fw mt-1"><i class="fa fa-pencil-square-o"></i> Edit</button> &nbsp;
+									<button (click)="delete(service._id)" type="button" class="btn btn-outline-danger btn-fw mt-1"><i
+											class="fa fa-trash-o"></i> Delete</button> &nbsp;
+									<button (click)="duplicate(service)" type="button" class="btn btn-outline-primary btn-fw mt-1"><i
+											class="fa fa-copy"></i> Duplicate</button>&nbsp;
+									<button (click)="avilablity(service._id)" type="button" class="btn btn-outline-warning btn-fw mt-1"><i
+											class="fa fa-clipboard"></i> Avilablity</button>
+								</p>
+
+								</div>							
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--  -->
+			<div  class="col-md-4 grid-margin stretch-card">
+				<div class="card">
+					<div class="card-body">
+							
+						<div class="d-sm-flex flex-row flex-wrap text-center text-sm-left align-items-center">					
+						  <h1 class="text-center text-{{theme}}" (click)="addService()"><i class="fa fa-plus-circle"></i></h1>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--  -->
+</div>
+		<!-- ============================== -->
+<div #model class="modal fade" id="myModel" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"  >
+				<div class="modal-dialog" role="document">
+				  <div class="modal-content">
+					<div class="modal-header">
+					  <h5 class="modal-title" id="ModalLabel"><i class="fa fa fa-superpowers"></i> &nbsp;&nbsp; {{name.value}}</h5>
+					  
+					  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					  </button>
+					</div>
+					<form class="forms-sample" #tempForm="ngForm" (ngSubmit)="updateService(tempForm)">
+					<div class="modal-body">							
+									<div class="form-group row">
+									  <label  for="exampleInputUsername2" class="col-sm-6 col-form-label">Service Name</label>
+									  <div class="col-sm-6">
+										<input #name="ngModel" [ngModel]="service.name" name="name"  type="text" class="form-control" required >
+										<span class="code-help" *ngIf="name?.touched && name?.errors?.required">This field is required</span>
+									  </div>
+									</div>
+									<div class="form-group row">
+										  <label for="exampleInputUsername2" class="col-sm-6 col-form-label">Duration</label>
+										  <div class="col-sm-6">
+										<div class="input-group">
+											<input (change)="validateDuration(duration.value,rest.value)" #duration="ngModel" name="duration" [ngModel]="service.duration"  type="number" class="form-control"  required>
+											<div class="input-group-prepend">
+													<span class="input-group-text">Minuite</span>
+											  </div>
+											</div>
+											<span class="code-help" *ngIf="duration?.touched && duration?.errors?.required">This field is required</span>
+											<span class="code-help" *ngIf="duration?.touched && maDurationErr && !duration?.errors?.required && (duration.value > 0 )" >Total (Duration + Resting Period) can not be Greater Than 1440 minute (1 day ) </span>
+											<span class="code-help" *ngIf="duration?.touched && (duration.value < 0 ) ">Negative Value is not alloewd </span>
+										  </div>
+									</div>
+									<div class="form-group row">
+										  <label for="exampleInputUsername2" class="col-sm-6 col-form-label">Resting Period</label>
+										  <div class="col-sm-6">
+										<div class="input-group">
+											<input (change)="validateDuration(duration.value,rest.value)" #rest="ngModel" name="rest" [ngModel]="service.rest" type="number" class="form-control"   required>
+											<div class="input-group-prepend">
+													<span class="input-group-text">Minuite</span>
+											  </div>
+										</div>
+											<span class="code-help" *ngIf="rest?.touched && rest?.errors?.required">This field is required </span>
+											<span class="code-help" *ngIf="rest?.touched && (rest.value < 0 ) ">Negative Value is not alloewd </span>
+										  </div>										  
+									</div>
+									<div class="form-group row">
+										<label for="exampleInputUsername2" class="col-sm-6 col-form-label">Start Date</label>
+										<div class="col-sm-6">
+										  <input (change)="validateStartDate(startDate.value)" min="minDate" #startDate="ngModel" name="startDate" [ngModel]="service.startDate" type="date" class="form-control"   required>
+								     	  <span class="code-help" *ngIf="startDate?.touched && startDate?.errors?.required">This field is required </span>
+										  <span class="code-help" *ngIf="startDate?.touched &&  invalidStartDate "> Before Date are not allow</span>
+										</div>										  
+								  </div>
+								  <div class="form-group row">
+									<label for="exampleInputUsername2" class="col-sm-6 col-form-label">End Date</label>
+									<div class="col-sm-6">
+									  <input (change)="validateEndDate(startDate.value,endDate.value)" min="minDate" #endDate="ngModel" name="endDate" [ngModel]="service.endDate" type="date" class="form-control">
+						
+									  <!-- <span class="code-help" *ngIf="endDate?.touched && endDate?.errors?.required">This field is required </span> -->
+									  <span class="code-help" *ngIf="endDate?.touched &&  invalidEndDate "> End Date must be greater than start Date</span>
+									</div>										  
+							      </div>
+									<div class="form-group row">
+										  <label for="exampleInputUsername2" class="col-sm-6 col-form-label">Price</label>
+										  <div class="col-sm-6">
+												<div class="input-group">
+														<div class="input-group-prepend">
+														  <span class="input-group-text"><i class="fa fa-inr"></i></span>
+														</div>
+														<input #price="ngModel" name="price" [ngModel]="service.price"  type="number" class="form-control"    required>
+											    </div>											
+											<span class="code-help" *ngIf="price?.touched && price?.errors?.required">This field is required </span>
+										  </div>
+									</div>
+									<div class="form-group row">
+										<label for="exampleInputUsername2" class="col-sm-6 col-form-label">Max Allowed </label>
+										<div class="col-sm-6">
+										<div class="input-group">
+										  <input (change)="validateMaxPerson(maxAllowed.value)"  #maxAllowed="ngModel" name="maxAllowed" [ngModel]="service.maxAllowed"  type="number" class="form-control"   required>
+										  <div class="input-group-prepend">
+												<span class="input-group-text">Person</span>
+										  </div>
+										</div>										
+										  <span class="code-help" *ngIf="maxAllowed?.touched && maxAllowed?.errors?.required">This field is required </span>
+										  <span class="code-help" *ngIf="maxAllowed?.touched && maxPersonErr && !maxAllowed?.errors?.required">At least one person is must </span>
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="exampleInputUsername2" class="col-sm-6 col-form-label">Advance Day allow  </label>
+										<div class="col-sm-6">
+										<div class="input-group">
+										  <input (change)="validatemaxAdvanceBookingDay(maxAdvanceBookingDay.value)"  #maxAdvanceBookingDay="ngModel" name="maxAdvanceBookingDay" [ngModel]="service.maxAdvanceBookingDay"  type="number" class="form-control"   required>
+										  <div class="input-group-prepend">
+												<span class="input-group-text">day</span>
+										  </div>
+										</div>										
+										  <span class="code-help" *ngIf="maxAdvanceBookingDay?.touched && maxAdvanceBookingDay?.errors?.required">This field is required </span>
+										  <span class="code-help" *ngIf="maxAdvanceBookingDay?.touched && maxAdvanceBookingDayErr && !maxAdvanceBookingDay?.errors?.required">At least 30 day is must must be allow in advance </span>
+										</div>
+								    </div>
+									
+					</div>
+					<div class="modal-footer">
+							<button type="submit" [disabled]="!tempForm.valid || maxPersonErr || maDurationErr || invalidEndDate || invalidStartDate || maxAdvanceBookingDayErr" class="btn btn-outline-{{theme}} btn-fw" >Update</button>	
+							<button type="submit" class="btn btn-outline-secondary btn-fw" data-dismiss="modal">Close</button>
+						</div>
+				  </form>
+				  </div>
+				</div>
+			  </div>			  
+	<!-- ============================== -->
+

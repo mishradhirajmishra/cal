@@ -1,0 +1,171 @@
+
+  <div class="container-scroller " [class.sidebar-icon-only]="hideSidebar">
+    <!-- partial:partials/_sidebar.html -->
+
+    <app-sidebar [hideSidebar]="hideSidebar"></app-sidebar>
+
+     <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+           <!-- partial:partials/_navbar.html --> 
+           <nav class="navbar p-0 d-flex flex-row">
+            <div class="navbar-menu-wrapper d-flex align-items-center">
+              <button (click)="toggleSidebar()" class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                <span class="ti-align-left"></span>
+              </button>
+              <div class="navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                <a class="navbar-brand brand-logo" href="index.html"><img src="assets/images/logo.svg" alt="logo"/></a>
+                <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo"/></a>
+              </div>
+              <ul class="navbar-nav navbar-nav-right ml-auto">
+                <li class="nav-item nav-search d-none d-sm-flex">
+                  <div class="nav-link d-flex justify-content-center align-items-center">
+                    <input type="text" class="form-control hidden" id="search-field" placeholder="Search...">
+                    <i class="ti-search mx-0" id="search-icon"></i>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
+                    <i class="ti-comment mx-0"></i>
+                    <span class="count"></span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+                    <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
+                    <a class="dropdown-item preview-item">
+                      <div class="preview-thumbnail">
+                          <img src="https://via.placeholder.com/36x36" alt="image" class="profile-pic">
+                      </div>
+                      <div class="preview-item-content flex-grow">
+                        <h6 class="preview-subject ellipsis font-weight-normal">David Grey
+                        </h6>
+                        <p class="font-weight-light small-text text-muted mb-0">
+                          The meeting is cancelled
+                        </p>
+                      </div>
+                    </a>
+                    <a class="dropdown-item preview-item">
+                      <div class="preview-thumbnail">
+                          <img src="https://via.placeholder.com/36x36" alt="image" class="profile-pic">
+                      </div>
+                      <div class="preview-item-content flex-grow">
+                        <h6 class="preview-subject ellipsis font-weight-normal">Tim Cook
+                        </h6>
+                        <p class="font-weight-light small-text text-muted mb-0">
+                          New product launch
+                        </p>
+                      </div>
+                    </a>
+                    <a class="dropdown-item preview-item">
+                      <div class="preview-thumbnail">
+                          <img src="https://via.placeholder.com/36x36" alt="image" class="profile-pic">
+                      </div>
+                      <div class="preview-item-content flex-grow">
+                        <h6 class="preview-subject ellipsis font-weight-normal"> Johnson
+                        </h6>
+                        <p class="font-weight-light small-text text-muted mb-0">
+                          Upcoming board meeting
+                        </p>
+                      </div>
+                    </a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" id="notificationDropdown" href="#" data-toggle="dropdown">
+                    <i class="ti-bell mx-0"></i>
+                    <span class="count"></span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+                    <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
+                    <a class="dropdown-item preview-item">
+                      <div class="preview-thumbnail">
+                        <div class="preview-icon bg-gradient-success">
+                          <i class="ti-info mx-0"></i>
+                        </div>
+                      </div>
+                      <div class="preview-item-content">
+                        <h6 class="preview-subject font-weight-normal">Application Error</h6>
+                        <p class="font-weight-light small-text mb-0 text-muted">
+                          Just now
+                        </p>
+                      </div>
+                    </a>
+                    <a class="dropdown-item preview-item">
+                      <div class="preview-thumbnail">
+                        <div class="preview-icon bg-gradient-warning">
+                          <i class="ti-settings mx-0"></i>
+                        </div>
+                      </div>
+                      <div class="preview-item-content">
+                        <h6 class="preview-subject font-weight-normal">Settings</h6>
+                        <p class="font-weight-light small-text mb-0 text-muted">
+                          Private message
+                        </p>
+                      </div>
+                    </a>
+                    <a class="dropdown-item preview-item">
+                      <div class="preview-thumbnail">
+                        <div class="preview-icon bg-gradient-info">
+                          <i class="ti-user mx-0"></i>
+                        </div>
+                      </div>
+                      <div class="preview-item-content">
+                        <h6 class="preview-subject font-weight-normal">New user registration</h6>
+                        <p class="font-weight-light small-text mb-0 text-muted">
+                          2 days ago
+                        </p>
+                      </div>
+                    </a>
+                  </div>
+                </li>
+                <li class="nav-item nav-profile dropdown">
+                  <a class="nav-link" href="#" data-toggle="dropdown" id="profileDropdown">
+                    <img src="https://via.placeholder.com/30x30" alt="profile"/>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                    <a class="dropdown-item">
+                      <i class="ti-settings text-primary"></i>
+                      Settings
+                    </a>
+                    <a class="dropdown-item" (click)="logout()">
+                      <i class="ti-new-window text-primary"></i>
+                      Logout
+                    </a>
+
+                    <a class="dropdown-item">
+                        <div (click)="addTheme('success')" class="bg-gradient-success box"></div>
+                        <div (click)="addTheme('primary')" class="bg-gradient-primary box"></div>
+                        <div (click)="addTheme('info')" class="bg-gradient-info box"></div>
+                        <div (click)="addTheme('warning')" class="bg-gradient-warning box"></div>
+                        <div (click)="addTheme('danger')" class="bg-gradient-danger box"></div>
+                    </a>
+
+
+                  </div>
+                </li>
+              </ul>
+              <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                <span (click)="toggleSidebar()" class="ti-menu"></span>
+              </button>
+            </div>
+          </nav> 
+          <!-- partial -->
+
+       <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+        <router-outlet></router-outlet>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-center text-sm-left d-block d-sm-inline-block">Copyright © 2019<a href="https://www.urbanui.com/" target="_blank" class="ml-1">Urbanui</a>. All rights reserved.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Designed by: UrbanUI<i class="ti-heart text-danger ml-1"></i></span>
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->

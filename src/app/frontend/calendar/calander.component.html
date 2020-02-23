@@ -1,0 +1,95 @@
+<div class="row">
+  <div *ngFor="let calendar of allCalendar" class="col-md-4 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-sm-flex flex-row flex-wrap  text-sm-left align-items-center">
+
+          <div class="ml-sm-3 ml-md-0 ml-xl-3 mt-2 mt-sm-0 mt-md-2 mt-xl-0">
+            <h4 class="mb-1"><i class="fa fa fa-superpowers"></i>&nbsp;&nbsp; {{calendar.name}}</h4>
+            <div class="desc">             
+              <p class=" mb-1 text-warning">Description</p>
+              <p class=" mb-1 detail"> {{calendar.description}}</p>
+              <p class=" mb-1 text-danger border-top">Service</p>
+              <div *ngFor="let ser of calendar.service"> 
+              <p class=" mb-1 detail">{{ser.name}} </p>
+              </div>
+            </div>
+            <p class="border-top pt-3 text-justify">
+              <button data-toggle="modal" data-target="#exampleModal-4" (click)="edit(calendar)" type="button"
+                class="btn btn-outline-info btn-fw btn-sm"><i class="fa fa-pencil-square-o"></i> Edit</button> &nbsp;
+              <button (click)="delete(calendar._id)" type="button" class="btn btn-outline-danger btn-fw"><i
+                  class="fa fa-trash-o"></i> Delete</button> &nbsp;
+              <button (click)="duplicate(calendar)" type="button" class="btn btn-outline-warning btn-fw"><i
+                  class="fa fa-copy"></i> Duplicate</button></p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  -->
+  <div class="col-md-4 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-sm-flex flex-row flex-wrap text-center text-sm-left align-items-center">
+          <h1 class="text-center text-{{theme}}" (click)="addCalendar()"><i class="fa fa-plus-circle"></i></h1>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  -->
+</div>
+<!-- ============================== -->
+<div class="modal fade" id="exampleModal-4" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel"><i class="fa fa fa-superpowers"></i> &nbsp;&nbsp; {{name.value}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    
+      <form class="forms-sample" #tempForm="ngForm" (ngSubmit)="updateCalendar(tempForm)">
+        <div class="modal-body">
+          <div class="form-group row">
+            <label for="exampleInputUsername2" class="col-12 col-form-label">Service Name</label>
+            <div class="col-12">
+              <input #name="ngModel" [ngModel]="calendar.name" name="name" type="text" class="form-control" required>
+              <span class="code-help" *ngIf="name?.touched && name?.errors?.required">This field is required</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="exampleInputUsername2" class="col-12 col-form-label">Description</label>
+            <div class="col-12">
+              <textarea rows="5" #desc="ngModel" [ngModel]="calendar.description" name="description"
+                class="form-control">{{calendar.description}}</textarea>
+            </div>
+          </div>
+          <!--  -->
+          <div  ngModelGroup="service">
+          <div class="form-group row" *ngFor="let service of allService;let i=index"> 
+            
+            <div class="col-12">
+                <div class="form-check form-check-{{theme}}">
+                    <label class="form-check-label">
+                        <input type="checkbox"  [ngModel]="serviceModel(calendar.service,service._id)" name="{{service._id}}">   
+                        {{service.name }}
+                    <i class="input-helper"></i></label>
+                  </div>       
+            </div>
+
+          </div>
+          </div>
+          <!--  -->
+        </div>
+        <div class="modal-footer">
+          <button type="submit" [disabled]="!tempForm.valid" class="btn btn-outline-{{theme}} btn-fw">Update</button>
+          <button type="submit" class="btn btn-outline-secondary btn-fw" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- ============================== -->

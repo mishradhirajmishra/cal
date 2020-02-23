@@ -1,0 +1,138 @@
+/* Layouts */
+
+// Sidebar Icon Only
+.sidebar-icon-only {
+  @media (min-width: 992px) {
+    .navbar {
+      left: $sidebar-width-icon;
+      .navbar-menu-wrapper {
+        width: calc(100% - #{$sidebar-width-icon});
+      }
+    }
+    .sidebar {
+      width: $sidebar-width-icon;
+      .navbar-brand-wrapper {
+        margin: 0px 8px;
+        .brand-logo {
+          display: none;
+        }
+        .brand-logo-mini {
+          display: inline-block;
+        }
+      }
+      .nav {
+        margin-bottom: 0px;
+        overflow: visible;
+        .nav-item {
+          position: relative;
+          .nav-link {
+            display: block;
+            padding-left: .5rem;
+            padding-right: .5rem;            
+            text-align: center;
+            position: static;
+            .menu-title,
+            .badge,.menu-sub-title {
+              display: none;
+            }
+            .menu-title {
+              @include border-radius(0 5px 5px 0px);
+              @at-root #{selector-append(".rtl", &)} {
+                @include border-radius(5px 0 0 5px);
+              }
+            }
+            i {
+              &.menu-icon {
+                margin-right: 0;
+                margin-left: 0;
+                margin-bottom: 0;
+              }
+              &.menu-arrow {
+                display: none;
+              }
+            }
+            &[aria-expanded] {
+              .menu-title {
+                @include border-radius(0 5px 0 0px);
+                @at-root #{selector-append(".rtl", &)} {
+                  @include border-radius(5px 0 0 0);
+                }
+              }
+            }
+          }
+          .collapse {
+            display: none;
+          }
+          &.hover-open {
+            .nav-link {
+              .menu-title {
+                @include display-flex;
+                @include align-items(center);
+                background: $icon-only-menu-bg;
+                padding: 0.5rem 1.4rem;
+                left: calc(#{$sidebar-width-icon} - #{$sidebar-content-wrapper-margin-left});
+                position: absolute;
+                text-align: left;
+                top: 0;
+                bottom: 0;
+                width: $icon-only-collapse-width;
+                z-index: 1;
+                line-height: 1.8;
+                border: 1px solid rgba(132, 132, 132, 0.2);
+                @at-root #{selector-append(".rtl", &)} {
+                  left: auto;
+                  right: $sidebar-width-icon;
+                  text-align: left;
+                  box-shadow: -2px 0px 7px 0px rgba(93, 103, 130, 0.25);                                
+                }
+                @at-root #{selector-append(".sidebar-dark", &)} {
+                  color: $white;
+                }
+                &:after {
+                  display: none;
+                }
+              }
+              &:hover {
+                .menu-title {
+                  background: $icon-only-menu-bg;
+                }
+              }
+            }
+            .collapse,
+            .collapsing {
+              display: block;
+              padding: .5rem 0;
+              background: $icon-only-menu-bg;
+              @include border-radius(0 0 5px 0);
+              position: absolute;
+              left:  calc(#{$sidebar-width-icon} - #{$sidebar-content-wrapper-margin-left});
+              width: $icon-only-collapse-width;
+              border: 1px solid rgba(132, 132, 132, 0.2);
+              @at-root #{selector-append(".rtl", &)} {
+                  left: auto;
+                  right:$sidebar-width-icon;
+                  @include border-radius(0 0 0 5px);
+                  box-shadow: -2px 6px 7px 0px rgba(93, 103, 130, 0.25);
+              }
+            }
+          }
+        }
+        &.sub-menu {
+          padding: $sidebar-icon-only-submenu-padding;
+          .nav-item {
+            .nav-link {
+              text-align: left;
+              padding-left: 20px;
+            }
+          }
+        }
+      }
+    }
+
+    .main-panel {
+      margin-left: $sidebar-width-icon;
+      width: calc(100% - #{$sidebar-width-icon});
+    }
+  }
+}
+
